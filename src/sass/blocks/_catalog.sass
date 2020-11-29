@@ -121,17 +121,18 @@
                 font-size: 14px
                 font-weight: 300
                 margin-bottom: 20px
-                &:before
-                    content: ''
-                    position: absolute
-                    width: 5px
-                    height: 5px
-                    background-color: $main-color
-                    left: -14px
-                    top: 7px
+                &:not(:last-child)
+                    &:before
+                        content: ''
+                        position: absolute
+                        width: 5px
+                        height: 5px
+                        background-color: $main-color
+                        left: -14px
+                        top: 7px
         &__back
             position: absolute
-            bottom: 0
+            bottom: -53px
             left: 50%
             transform: translateX(calc( -50% - 19px ))
             display: block

@@ -38,9 +38,11 @@ $(document).ready(function(){
     $('[data-modal=consultation]').on('click', function() {
         $('.overlay, #consultation').fadeIn('slow');
     });
+
     $('.modal__close').on('click', function() {
         $('.overlay, #consultation, #order, #thanks').fadeOut('slow');
     });
+
     $('.button_mini').each(function(i) {
         $(this).on('click', function() {
             $('#order .modal__descr').text($('.catalog-item__subtitle').eq(i).text());
@@ -84,10 +86,28 @@ $(document).ready(function(){
         }
     });
 
-    $("a[href^='#']").click(function(){
+    $("a[href=#up]").click(function(){
         const _href = $(this).attr("href");
         $("html, body").animate({scrollTop: $(_href).offset().top+"px"});
         return false;
     }); 
+
+    new WOW().init();
+
+    $('form').submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'mailer/smart.php',
+            data: $(this).serialize()
+        }).done(function() {
+            $(this).find('input').val('');
+            $('#consultation, #order').fadeOut();
+            $('.overlay, #thanks').fadeIn('slow');
+
+            $('form').trigger('reset');
+        });
+        return false;
+    });
 
   });
